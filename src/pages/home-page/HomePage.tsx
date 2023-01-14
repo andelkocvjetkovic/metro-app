@@ -1,9 +1,11 @@
 import { Fragment, useState, useMemo } from 'react';
 import allCities from '@app/cities';
+import { ROUTE_DETAILS } from '@app/constants';
 import { useFavoriteCity } from '@app/hook/use-favorite-cities/useFavoriteCites';
 import { Combobox, Transition } from '@headlessui/react';
 import { StarIcon as StarIconSolid, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { StarIcon as StarIconOutline } from '@heroicons/react/24/outline';
+import { Link } from 'react-router-dom';
 import type { City } from '@app/types/city';
 
 function HomePage() {
@@ -50,6 +52,8 @@ function HomePage() {
                 ) : (
                   filteredCities.map(c => (
                     <Combobox.Option
+                      as={Link}
+                      to={`${ROUTE_DETAILS}/${encodeURI(c.cityId)}`}
                       key={c.cityId}
                       className={({ active }) =>
                         `relative cursor-default select-none px-2 flex justify-between items-center h-9 ${

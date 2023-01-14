@@ -1,4 +1,4 @@
-import { lazy, useCallback, useMemo, useState } from 'react';
+import { lazy, useCallback, useMemo, useState, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ROUTE_HOME, ROUTE_DETAILS, ROUTE_SETTINGS } from '@app/constants';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -18,16 +18,28 @@ const router = createBrowserRouter([
     children: [
       {
         path: ROUTE_HOME,
-        element: <HomeLazy />,
+        element: (
+          <Suspense fallback={null}>
+            <HomeLazy />
+          </Suspense>
+        ),
         errorElement: <ErrorPage />,
       },
       {
         path: ROUTE_DETAILS,
-        element: <DetailsLazy />,
+        element: (
+          <Suspense fallback={null}>
+            <DetailsLazy />
+          </Suspense>
+        ),
         children: [
           {
             path: ':city',
-            element: <CityLazy />,
+            element: (
+              <Suspense fallback={null}>
+                <CityLazy />
+              </Suspense>
+            ),
           },
         ],
       },
