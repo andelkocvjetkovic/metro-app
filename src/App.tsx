@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ROUTE_HOME, ROUTE_DETAILS, ROUTE_SETTINGS } from '@app/constants';
 import ErrorPage from '@app/pages/error-page/ErrorPage';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const HomeLazy = lazy(() => import('@app/pages/home-page/HomePage'));
 const DetailsLazy = lazy(() => import('@app/pages/details-page/DetailsPage'));
@@ -30,8 +31,14 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient();
+
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />;
+    </QueryClientProvider>
+  );
 }
 
 export default App;
