@@ -5,7 +5,9 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import ErrorPage from '@app/pages/error-page/ErrorPage';
 import MainLayout from '@app/pages/_partial/main-layout/MainLayout';
 import { FavoriteCitiesProvider } from '@app/hook/use-favorite-cities/useFavoriteCites';
+import { SettingsProvider, useSettings, defaultSettings } from '@app/hook/use-settings/useSettings';
 import type { City } from '@app/types/city';
+import type { SettingsUnit } from '@app/hook/use-settings/useSettings';
 
 const HomeLazy = lazy(() => import('@app/pages/home-page/HomePage'));
 const DetailsLazy = lazy(() => import('@app/pages/details-page/DetailsPage'));
@@ -65,12 +67,41 @@ function App() {
     [addNewCity, favoriteCities, deleteByCityId]
   );
 
+  const [settingsUnit, setSettingsUnit] = useState(() => {
+    const initialValue = defaultSettings.settings as SettingsUnit;
+    try {
+      const item = window.localStorage.getItem('settings');
+      return item ? (JSON.parse(item) as SettingsUnit) : initialValue;
+    } catch (error) {
+      console.warn(`Error reading localStorage key “settings”:`, error);
+      return initialValue;
+    }
+  });
+
+  const updateSettings = useCallback(
+    (settings: SettingsUnit) => {
+      window.localStorage.setItem('settings', JSON.stringify(settings));
+      setSettingsUnit(settings);
+    },
+    [setSettingsUnit]
+  );
+
+  const settingsValue = useMemo(
+    () => ({
+      settings: settingsUnit,
+      updateSettings,
+    }),
+    [settingsUnit, updateSettings]
+  );
+
   return (
-    <FavoriteCitiesProvider value={favoriteCitiesValue}>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
-    </FavoriteCitiesProvider>
+    <SettingsProvider value={settingsValue}>
+      <FavoriteCitiesProvider value={favoriteCitiesValue}>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </FavoriteCitiesProvider>
+    </SettingsProvider>
   );
 }
 
