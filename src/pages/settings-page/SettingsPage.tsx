@@ -1,8 +1,9 @@
-import { useState, PropsWithChildren, ComponentPropsWithRef } from 'react';
+import { PropsWithChildren } from 'react';
 import RadioButton from '@app/components/radio-button/RadioButton';
 import Select from '@app/components/select/Select';
 import { useSettings, defaultSettings } from '@app/hook/use-settings/useSettings';
 import { useFavoriteCity } from '@app/hook/use-favorite-cities/useFavoriteCites';
+import OutlineButton from '@app/components/outline-button/OutlineButton';
 
 const TimeZones = [
   'America/Anchorage',
@@ -29,7 +30,7 @@ const pastDay = ['0', '1', '2', '3', '5', '7', '14', '31', '61', '92'];
 function SettingsPage() {
   const { settings, updateSettings } = useSettings();
   const { temperatureUnit, windSpeedUnit, precipitationUnit, timezoneUnit, pastDayUnit } = settings;
-  const { clearCities } = useFavoriteCity();
+  const { clearCities, cities } = useFavoriteCity();
   return (
     <div className='flex flex-col gap-10 mt-6'>
       <h1 className='text-3xl text-center text-gray-500'>Application Settings</h1>
@@ -174,6 +175,7 @@ function SettingsPage() {
           onClick={() => {
             clearCities();
           }}
+          disabled={cities.length === 0}
         >
           Delete favourites
         </OutlineButton>
@@ -187,10 +189,3 @@ export default SettingsPage;
 const RadioGroupContainer = ({ children }: PropsWithChildren) => <div className='flex gap-9'>{children}</div>;
 
 const SettingContainer = ({ children }: PropsWithChildren) => <div className='flex flex-col gap-3 items-center'>{children}</div>;
-
-const OutlineButton = (props: ComponentPropsWithRef<'button'>) => (
-  <button
-    className='<button type="button" class="inline-block px-8 py-2 border-2 border-red-500 text-red-500 font-medium text-xs leading-tight rounded-md  hover:text-red-700 hover:border-red-700 focus:outline-none focus:ring-0 transition duration-150 ease-in-out'
-    {...props}
-  />
-);
