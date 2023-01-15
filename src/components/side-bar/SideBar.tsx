@@ -1,6 +1,7 @@
 import { PropsWithChildren, useRef } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import useDialog from '@app/hook/use-dialiog/useDialog';
+import IconButton from '@app/components/icon-button/IconButton';
 
 type SideBarProps = {
   isOpen: boolean;
@@ -20,9 +21,9 @@ function SideBar({ children, isOpen, onClose }: SideBarProps) {
       inert={isOpen ? null : ''}
     >
       <header className='flex justify-end items-center p-2'>
-        <button onClick={onClose} autoFocus className='w-6 h-6 text-gray-900'>
+        <IconButton onClick={onClose} autoFocus>
           <XMarkIcon />
-        </button>
+        </IconButton>
       </header>
       <main className='px-2 py-1'>{children}</main>
     </dialog>

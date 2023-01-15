@@ -6,6 +6,7 @@ import sortBy from 'sort-by';
 import { ROUTE_SETTINGS } from '@app/constants';
 import SideBar from '@app/components/side-bar/SideBar';
 import { ChevronDoubleRightIcon } from '@heroicons/react/24/solid';
+import IconButton from '@app/components/icon-button/IconButton';
 
 function MainLayout() {
   const { cities } = useFavoriteCity();
@@ -24,9 +25,9 @@ function MainLayout() {
 
   return (
     <main className='grid grid-cols-12 h-screen bg-gray-200 overflow-hidden'>
-      <button className='fixed top-2 left-2 w-6 h-6' onClick={() => setIsSideBarOpen(true)}>
+      <IconButton className='fixed top-2 left-2' onClick={() => setIsSideBarOpen(true)}>
         <ChevronDoubleRightIcon />
-      </button>
+      </IconButton>
       <SideBar isOpen={isSideBarOpen} onClose={() => setIsSideBarOpen(false)}>
         <div className='flex flex-col gap-3'>
           <nav>
