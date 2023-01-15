@@ -50,7 +50,7 @@ function MainLayout() {
           </h1>
           <ul className='px-4 flex flex-col gap-1 h-100 overflow-x-auto'>
             {sortedCities.map(c => (
-              <li className='text-xl' key={c.cityId}>
+              <li key={c.cityId}>
                 <FavoriteCity {...c} />
               </li>
             ))}

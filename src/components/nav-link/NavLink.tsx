@@ -1,7 +1,7 @@
 import { NavLink as RouterNavLink, NavLinkProps } from 'react-router-dom';
 import className from 'classnames';
 
-function NavLink(props: Omit<NavLinkProps, 'className'>) {
+function NavLink(props: NavLinkProps) {
   return (
     <RouterNavLink
       {...props}

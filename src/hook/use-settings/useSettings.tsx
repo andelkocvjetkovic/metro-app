@@ -1,7 +1,7 @@
 import { createContext, PropsWithChildren, useContext } from 'react';
 
 type temperatureUnit = 'celsius' | 'fahrenheit';
-type windSpeedUnit = 'km/h' | 'm/s' | 'mph' | 'kn';
+type windSpeedUnit = 'kmh' | 'ms' | 'mph' | 'kn';
 type precipitationUnit = 'milimeter' | 'inch';
 type timezoneUnit = string;
 type pastDayUnit = string;
@@ -17,7 +17,7 @@ type SettingsUnit = {
 const defaultSettings: { settings: SettingsUnit; updateSettings: (settings: SettingsUnit) => void } = {
   settings: {
     temperatureUnit: 'celsius',
-    windSpeedUnit: 'km/h',
+    windSpeedUnit: 'kmh',
     precipitationUnit: 'milimeter',
     timezoneUnit: 'GMT',
     pastDayUnit: '0',

@@ -63,21 +63,21 @@ function SettingsPage() {
         <h4 className='text-lg'>Wind Speed Unit</h4>
         <RadioGroupContainer>
           <RadioButton
-            value='km/h'
-            isChecked={windSpeedUnit === 'km/h'}
+            value='kmh'
+            isChecked={windSpeedUnit === 'kmh'}
             id='km/h'
             onChange={() => {
-              updateSettings({ ...settings, windSpeedUnit: 'km/h' });
+              updateSettings({ ...settings, windSpeedUnit: 'kmh' });
             }}
           >
             km/h
           </RadioButton>
           <RadioButton
-            value='m/s'
-            isChecked={windSpeedUnit === 'm/s'}
+            value='ms'
+            isChecked={windSpeedUnit === 'ms'}
             id='m/s'
             onChange={() => {
-              updateSettings({ ...settings, windSpeedUnit: 'm/s' });
+              updateSettings({ ...settings, windSpeedUnit: 'ms' });
             }}
           >
             m/s
