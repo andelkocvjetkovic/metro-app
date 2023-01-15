@@ -7,6 +7,7 @@ import { StarIcon as StarIconSolid, MagnifyingGlassIcon } from '@heroicons/react
 import { StarIcon as StarIconOutline } from '@heroicons/react/24/outline';
 import type { City } from '@app/types/city';
 import { matchSorter } from 'match-sorter';
+import IconButton from '@app/components/icon-button/IconButton';
 
 function HomePage() {
   const { addNewCity, deleteByCityId, cities } = useFavoriteCity();
@@ -64,20 +65,16 @@ function HomePage() {
                       value={c}
                     >
                       <span className={`block truncate`}>{c.name}</span>
-                      <button
-                        className='flex px-2 h-100'
+                      <IconButton
+                        className='flex h-100'
                         onClick={e => {
                           e.preventDefault();
                           if (cities.some(fc => fc.cityId === c.cityId)) deleteByCityId(c.cityId);
                           else addNewCity(c);
                         }}
                       >
-                        {cities.some(fc => fc.cityId === c.cityId) ? (
-                          <StarIconSolid className='w-6 h-6' />
-                        ) : (
-                          <StarIconOutline className='w-6 h-6' />
-                        )}
-                      </button>
+                        {cities.some(fc => fc.cityId === c.cityId) ? <StarIconSolid /> : <StarIconOutline />}
+                      </IconButton>
                     </Combobox.Option>
                   ))
                 )}

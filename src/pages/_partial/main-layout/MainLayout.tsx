@@ -7,6 +7,7 @@ import { ROUTE_SETTINGS } from '@app/constants';
 import SideBar from '@app/components/side-bar/SideBar';
 import { ChevronDoubleRightIcon } from '@heroicons/react/24/solid';
 import IconButton from '@app/components/icon-button/IconButton';
+import NavLink from '@app/components/nav-link/NavLink';
 
 function MainLayout() {
   const { cities } = useFavoriteCity();
@@ -32,8 +33,8 @@ function MainLayout() {
         <div className='flex flex-col gap-3'>
           <nav>
             <ul className='flex gap-2'>
-              <Link to='/'>Home</Link>
-              <Link to={`${ROUTE_SETTINGS}`}>Settings</Link>
+              <NavLink to='/'>Home</NavLink>
+              <NavLink to={`${ROUTE_SETTINGS}`}>Settings</NavLink>
             </ul>
           </nav>
           <h1 className='text-2xl font-medium flex justify-between items-center'>
