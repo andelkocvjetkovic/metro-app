@@ -20,8 +20,9 @@ function MainLayout() {
           Favourites
           <button
             type='button'
-            className='group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900'
+            className='group inline-flex justify-center text-sm font-medium text-gray-700 disabled:text-gray-400 hover:text-gray-900'
             onClick={() => setIsAscSort(!isAscSort)}
+            disabled={sortedCities.length === 0}
           >
             Sort {isAscSort ? 'Descending' : 'Ascending'}
           </button>

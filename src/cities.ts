@@ -1,8 +1,7 @@
 import cities from '@app/cities.json';
-import uuidv from '@app/utils/uuid';
 
 export default cities.map(c => ({
-  cityId: uuidv(),
+  cityId: c.city,
   name: c.city,
   lng: c.lng,
   lat: c.lat,

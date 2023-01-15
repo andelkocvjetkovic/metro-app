@@ -34,7 +34,7 @@ const router = createBrowserRouter([
         ),
         children: [
           {
-            path: ':city',
+            path: ':cityId',
             element: (
               <Suspense fallback={null}>
                 <CityLazy />
