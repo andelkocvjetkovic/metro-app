@@ -28,19 +28,22 @@ function CityPage() {
       const temperatureUnit = `&temperature_unit=${settings.temperatureUnit}`;
       const timeZone = `&timezone=${settings.timezoneUnit}`;
       const pastDayUnit = `&past_days=${settings.pastDayUnit}`;
+      const windSpeedUnit = `&windspeed_unit=${settings.windSpeedUnit}`;
       const lat = `latitude=${city?.lat}`;
       const lng = `&longitude=${city?.lng}`;
-      return fetch(`${API_BASE}${lat}${lng}${hour}${day}${temperatureUnit}${timeZone}${pastDayUnit}`).then(res => res.json());
+      return fetch(`${API_BASE}${lat}${lng}${hour}${day}${temperatureUnit}${timeZone}${pastDayUnit}${windSpeedUnit}`).then(res =>
+        res.json()
+      );
     },
     { enabled: !!city && variableView !== '' }
   );
 
-  if (!city) return <div>Something went wrong, try again</div>;
+  if (!city) return <div className='text-center'>Something went wrong, try again</div>;
 
   return (
     <div className='flex flex-col'>
       <h1 className='text-3xl text-gray-500 text-center mt-6'>Meteorologic data for {city?.name}</h1>
-      <div className='w-96 mx-auto mt-6'>
+      <div className='w-full max-w-xs mx-auto mt-6'>
         <Select value={variableView} onChange={e => setVariableView(e.target.value as VariableView)}>
           <option disabled value=''>
             -- Select variable --
@@ -58,9 +61,13 @@ function CityPage() {
           )
         ) : undefined}
       </div>
-      {isLoading && <div>Loading ...</div>}
-      {error && <div>Something went wrong, try again</div>}
-      {data && <div>Sucess</div>}
+      {isLoading && <div className='text-center'>Loading ...</div>}
+      {error && <div className='text-center'>Something went wrong, try again</div>}
+      {data && (
+        <div className='mx-auto mt-6 max-w-full'>
+          <pre>{JSON.stringify(data, undefined, 2)}</pre>
+        </div>
+      )}
     </div>
   );
 }

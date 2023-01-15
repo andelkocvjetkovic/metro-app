@@ -21,7 +21,7 @@ function DayVariables({ variables, setVariables }: DayVariablesProps) {
 
   return (
     <div className='grid grid-cols-12 gap-12'>
-      <div className='col-span-6'>
+      <div className='col-span-12 md:col-span-6'>
         <Checkbox
           id={WEATHERCODE_DAILY}
           isChecked={variables.includes(WEATHERCODE_DAILY)}
@@ -44,7 +44,7 @@ function DayVariables({ variables, setVariables }: DayVariablesProps) {
           Maximum Apparent Temperature (2 m)
         </Checkbox>
       </div>
-      <div className='col-span-6'>
+      <div className='col-span-12 md:col-span-6'>
         <Checkbox
           id={PRECIPITATION_SUM}
           isChecked={variables.includes(PRECIPITATION_SUM)}

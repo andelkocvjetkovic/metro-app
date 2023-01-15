@@ -131,7 +131,7 @@ function SettingsPage() {
       </SettingContainer>
       <SettingContainer>
         <h4 className='text-lg'>Timezone</h4>
-        <div className='w-96'>
+        <div className='w-full max-w-xs'>
           <Select
             value={timezoneUnit}
             onChange={e => {
@@ -148,7 +148,7 @@ function SettingsPage() {
       </SettingContainer>
       <SettingContainer>
         <h4 className='text-lg'>Past days</h4>
-        <div className='w-96'>
+        <div className='w-full max-w-xs'>
           <Select
             value={pastDayUnit}
             onChange={e => {
@@ -163,7 +163,7 @@ function SettingsPage() {
           </Select>
         </div>
       </SettingContainer>
-      <div className='flex gap-10 justify-center'>
+      <div className='flex flex-col gap-5 md:flex-row md:gap-10 justify-center'>
         <OutlineButton
           onClick={() => {
             updateSettings(defaultSettings.settings);
@@ -186,6 +186,6 @@ function SettingsPage() {
 
 export default SettingsPage;
 
-const RadioGroupContainer = ({ children }: PropsWithChildren) => <div className='flex gap-9'>{children}</div>;
+const RadioGroupContainer = ({ children }: PropsWithChildren) => <div className='flex gap-4 md:gap-8'>{children}</div>;
 
 const SettingContainer = ({ children }: PropsWithChildren) => <div className='flex flex-col gap-3 items-center'>{children}</div>;

@@ -18,7 +18,7 @@ type HourVariableProps = { variables: string[]; setVariables: (newVars: string[]
 function HourVariable({ variables, setVariables }: HourVariableProps) {
   return (
     <div className='grid grid-cols-12 gap-8'>
-      <div className='col-span-3'>
+      <div className='col-span-12 md:col-span-6 lg:col-span-3'>
         <Checkbox
           id={TEMPERATURE_2M}
           isChecked={variables.includes(TEMPERATURE_2M)}
@@ -50,7 +50,7 @@ function HourVariable({ variables, setVariables }: HourVariableProps) {
           Dewpoint (2 m)
         </Checkbox>
       </div>
-      <div className='col-span-3'>
+      <div className='col-span-12 md:col-span-6 lg:col-span-3'>
         <Checkbox
           id={WEATHERCODE}
           isChecked={variables.includes(WEATHERCODE)}
@@ -82,7 +82,7 @@ function HourVariable({ variables, setVariables }: HourVariableProps) {
           Surface Pressure
         </Checkbox>
       </div>
-      <div className='col-span-3'>
+      <div className='col-span-12 md:col-span-6 lg:col-span-3'>
         <Checkbox
           id={WINDSPEED_10M}
           isChecked={variables.includes(WINDSPEED_10M)}
@@ -114,7 +114,7 @@ function HourVariable({ variables, setVariables }: HourVariableProps) {
           Wind Speed (120 m)
         </Checkbox>
       </div>
-      <div className='col-span-3'>
+      <div className='col-span-12 md:col-span-6 lg:col-span-3'>
         <Checkbox
           id={SOIL_TEMPERATURE_0CM}
           isChecked={variables.includes(SOIL_TEMPERATURE_0CM)}

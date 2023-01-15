@@ -22,7 +22,7 @@ function HomePage() {
   return (
     <div className='flex flex-col gap-11'>
       <h1 className='text-gray-900 text-4xl text-center mt-20'>Meteo App</h1>
-      <div className='m-auto w-8/12 flex flex-col'>
+      <div className='w-full max-w-2xl mx-auto flex flex-col'>
         <Combobox
           onChange={(c: City) => {
             navigate(`/${c.cityId}`);
