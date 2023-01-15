@@ -1,24 +1,22 @@
 import { Fragment, useState, useMemo } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import allCities from '@app/cities';
 import { ROUTE_DETAILS } from '@app/constants';
 import { useFavoriteCity } from '@app/hook/use-favorite-cities/useFavoriteCites';
 import { Combobox, Transition } from '@headlessui/react';
 import { StarIcon as StarIconSolid, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { StarIcon as StarIconOutline } from '@heroicons/react/24/outline';
-import { Link } from 'react-router-dom';
 import type { City } from '@app/types/city';
+import { matchSorter } from 'match-sorter';
 
 function HomePage() {
   const { addNewCity, deleteByCityId, cities } = useFavoriteCity();
   const [query, setQuery] = useState('');
+  const navigate = useNavigate();
 
   const filteredCities = useMemo(
     () =>
-      query.trim() === ''
-        ? allCities.slice(0, 5)
-        : allCities
-            .filter(city => city.name.toLowerCase().replace(/\s+/g, '').includes(query.toLowerCase().replace(/\s+/g, '')))
-            .slice(0, 5),
+      query.trim() === '' ? allCities.slice(0, 5) : matchSorter(allCities, query, { keys: ['name', 'lat', 'lng'] }).slice(0, 5),
     [query]
   );
 
@@ -26,14 +24,18 @@ function HomePage() {
     <div className='flex flex-col gap-11'>
       <h1 className='text-gray-900 text-4xl text-center mt-20'>Meteo App</h1>
       <div className='m-auto w-8/12 flex flex-col'>
-        <Combobox>
+        <Combobox
+          onChange={(c: City) => {
+            navigate(`${ROUTE_DETAILS}/${encodeURI(c.cityId)}`);
+          }}
+        >
           <div className='relative mt-1'>
             <div className='relative w-full cursor-default overflow-hidden rounded-lg  bg-white text-left shadow-md'>
               <Combobox.Input
                 className='w-full border-none pl-4 pr-12 py-2 h-9 text-sm leading-5 text-gray-900 focus:outline-pink-400 rounded-lg'
                 displayValue={(c: City) => c.name}
                 onChange={event => setQuery(event.target.value)}
-                placeholder='Search by city name'
+                placeholder='Search cities by name or latitude or longitude'
               />
               <Combobox.Button className='absolute inset-y-0 right-0 flex items-center justify-center mr-4 w-6 text-pink-500 h-100'>
                 <MagnifyingGlassIcon />

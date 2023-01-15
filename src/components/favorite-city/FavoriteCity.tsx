@@ -11,8 +11,6 @@ function FavoriteCity(props: FavoriteCityProps) {
   const { name, cityId, lng, lat } = props;
   const [isHovered, setIsHovered] = useState(false);
   const { deleteByCityId } = useFavoriteCity();
-  console.log('encode', encodeURI(cityId));
-  console.log('normal', cityId);
   return (
     <Link
       to={`${ROUTE_DETAILS}/${encodeURI(cityId)}`}
