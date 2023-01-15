@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { useFavoriteCity } from '@app/hook/use-favorite-cities/useFavoriteCites';
 import FavoriteCity from '@app/components/favorite-city/FavoriteCity';
 import sortBy from 'sort-by';
+import { ROUTE_SETTINGS } from '@app/constants';
 
 function MainLayout() {
   const { cities } = useFavoriteCity();
@@ -16,6 +17,12 @@ function MainLayout() {
   return (
     <main className='grid grid-cols-12 h-screen bg-gray-200 overflow-hidden'>
       <aside className='col-span-3 p-4 flex flex-col gap-3 h-100 overflow-hidden'>
+        <nav>
+          <ul className='flex gap-3'>
+            <Link to='/'>Home</Link>
+            <Link to={`${ROUTE_SETTINGS}`}>Settings</Link>
+          </ul>
+        </nav>
         <h1 className='text-2xl font-medium flex justify-between items-center'>
           Favourites
           <button

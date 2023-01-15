@@ -1,22 +1,22 @@
 import { lazy, useCallback, useMemo, useState, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { ROUTE_HOME, ROUTE_DETAILS, ROUTE_SETTINGS } from '@app/constants';
+import { ROUTE_HOME, ROUTE_SETTINGS } from '@app/constants';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ErrorPage from '@app/pages/error-page/ErrorPage';
 import MainLayout from '@app/pages/_partial/main-layout/MainLayout';
 import { FavoriteCitiesProvider } from '@app/hook/use-favorite-cities/useFavoriteCites';
-import { SettingsProvider, useSettings, defaultSettings } from '@app/hook/use-settings/useSettings';
+import { SettingsProvider, defaultSettings } from '@app/hook/use-settings/useSettings';
 import type { City } from '@app/types/city';
 import type { SettingsUnit } from '@app/hook/use-settings/useSettings';
 
 const HomeLazy = lazy(() => import('@app/pages/home-page/HomePage'));
-const DetailsLazy = lazy(() => import('@app/pages/details-page/DetailsPage'));
-const CityLazy = lazy(() => import('@app/pages/details-page/city-page/CityPage'));
+const CityLazy = lazy(() => import('@app/pages/city-page/CityPage'));
 const SettingsLazy = lazy(() => import('@app/pages/settings-page/SettingsPage'));
 
 const router = createBrowserRouter([
   {
     element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: ROUTE_HOME,
@@ -25,31 +25,24 @@ const router = createBrowserRouter([
             <HomeLazy />
           </Suspense>
         ),
-        errorElement: <ErrorPage />,
       },
       {
-        path: ROUTE_DETAILS,
+        path: ':cityId',
         element: (
           <Suspense fallback={null}>
-            <DetailsLazy />
+            <CityLazy />
           </Suspense>
         ),
-        children: [
-          {
-            path: ':cityId',
-            element: (
-              <Suspense fallback={null}>
-                <CityLazy />
-              </Suspense>
-            ),
-          },
-        ],
+      },
+      {
+        path: ROUTE_SETTINGS,
+        element: (
+          <Suspense fallback={null}>
+            <SettingsLazy />
+          </Suspense>
+        ),
       },
     ],
-  },
-  {
-    path: ROUTE_SETTINGS,
-    element: <SettingsLazy />,
   },
 ]);
 
@@ -62,9 +55,10 @@ function App() {
     (cityId: string) => setFavoriteCites(favoriteCities.filter(c => c.cityId !== cityId)),
     [favoriteCities]
   );
+  const clearCities = useCallback(() => setFavoriteCites([]), [setFavoriteCites]);
   const favoriteCitiesValue = useMemo(
-    () => ({ cities: favoriteCities, addNewCity, deleteByCityId }),
-    [addNewCity, favoriteCities, deleteByCityId]
+    () => ({ cities: favoriteCities, addNewCity, deleteByCityId, clearCities }),
+    [addNewCity, favoriteCities, deleteByCityId, clearCities]
   );
 
   const [settingsUnit, setSettingsUnit] = useState(() => {

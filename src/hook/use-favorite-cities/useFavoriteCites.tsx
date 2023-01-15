@@ -5,12 +5,14 @@ type FavoriteCities = {
   cities: City[];
   addNewCity: (c: City) => void;
   deleteByCityId: (cityId: string) => void;
+  clearCities: () => void;
 };
 
 const FavoriteCitiesContext = createContext<FavoriteCities>({
   cities: [],
   addNewCity: _ => undefined,
   deleteByCityId: _ => undefined,
+  clearCities: () => undefined,
 });
 
 type FavoriteCitiesProviderProps = { value: FavoriteCities } & PropsWithChildren;
