@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { useFavoriteCity } from '@app/hook/use-favorite-cities/useFavoriteCites';
 import FavoriteCity from '@app/components/favorite-city/FavoriteCity';
 import sortBy from 'sort-by';

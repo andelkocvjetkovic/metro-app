@@ -310,6 +310,11 @@
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.3.13.tgz#da4bfd73f49bd541d28920ab0e2bf0ee80f71c91"
   integrity sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==
 
+"@types/sort-by@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@types/sort-by/-/sort-by-1.2.0.tgz#a694acb93f36042d7f9b7eae2213d238100e06f6"
+  integrity sha512-apuh0Itbhv/JUIHVYkeUGPiAwUen0gAFyMHBYaCqpthcq20tsLT8Qs9yMntk9jMG85CoZp3ze2Sv+BhuKhP1gw==
+
 "@typescript-eslint/eslint-plugin@5.48.1":
   version "5.48.1"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.48.1.tgz#deee67e399f2cb6b4608c935777110e509d8018c"
