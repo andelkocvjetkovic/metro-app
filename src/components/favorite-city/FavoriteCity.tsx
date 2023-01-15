@@ -11,16 +11,20 @@ function FavoriteCity(props: FavoriteCityProps) {
   const { name, cityId } = props;
   const [isHovered, setIsHovered] = useState(false);
   const { deleteByCityId } = useFavoriteCity();
+  console.log(isHovered);
   return (
     <Link
       to={`/${cityId}`}
       className='flex gap-3 items-center text-gray-500 text-base font-medium hover:text-gray-900 cursor-pointer'
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={() => {
+        setIsHovered(false);
+      }}
     >
       {name}
       {isHovered && (
         <IconButton
+          title={`Delete ${name}`}
           onClick={e => {
             e.preventDefault();
             deleteByCityId(cityId);

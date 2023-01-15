@@ -2,7 +2,7 @@ import Checkbox from '../Checkbox';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-let onChange = jest.fn();
+const onChange = jest.fn();
 
 beforeEach(() => {
   onChange.mockReset();
